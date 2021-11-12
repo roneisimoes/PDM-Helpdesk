@@ -4,6 +4,8 @@ import 'package:projeto_banco/models/categoria.dart';
 import 'package:projeto_banco/models/status.dart';
 import 'package:projeto_banco/models/chamados.dart';
 import 'package:projeto_banco/ui/chamado_page.dart';
+import 'package:projeto_banco/ui/status_page.dart';
+import 'package:projeto_banco/ui/categoria_page.dart';
 import 'package:flutter/material.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
@@ -65,8 +67,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chamados"),
-        backgroundColor: Colors.black,
+        title: Text("Helpdesk IFSC"),
+        backgroundColor: Colors.greenAccent,
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
@@ -76,7 +78,7 @@ class _HomePageState extends State<HomePage> {
           _showChamadoPage();
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.greenAccent,
       ),
       body: ListView.builder(
           padding: EdgeInsets.all(10.0),
@@ -84,6 +86,68 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return _chamadoCard(context, index);
           }),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: <Color>[Colors.greenAccent, Colors.white30])),
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Material(
+                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                        elevation: 10,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            'images/person.jpg',
+                            width: 80,
+                            height: 80,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Helpdesk IFSC',
+                          style: TextStyle(color: Colors.black, fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                )),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Responsáveis'),
+              subtitle: Text('tela de cadastro de responsáveis'),
+              onTap: () {
+                print('eu');
+                _showChamadoPage();
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.list_alt_sharp),
+              title: Text('Categorias'),
+              subtitle: Text('tela de cadastro de categorias'),
+              onTap: () {
+                print('eu');
+                _showCategoriaPage();
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.comment_rounded),
+              title: Text('Status'),
+              subtitle: Text('tela de cadastro de status'),
+              onTap: () {
+                print('eu');
+                _showStatusPage();
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -146,5 +210,57 @@ class _HomePageState extends State<HomePage> {
       });
       //print(list);
     });
+  }
+
+  void _showStatusPage({Status status}) async {
+    final Status recStatus = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => StatusPage(
+                  status: status,
+                )));
+    if (recStatus != null) {
+      if (status != null) {
+        // await statusConnect.updatestatus(recStatus.status);
+      } else {
+        // await statusConnect.saveStatus(recStatus.status);
+      }
+      _getAllStatus();
+    }
+  }
+
+  void _getAllStatus() {
+    // StatusConnect.getAllStatus().then((list) {
+    // setState(() {
+    //  listaStatus = list;
+    // });
+    //print(list);
+    // });
+  }
+
+  void _showCategoriaPage({Categoria categorias}) async {
+    final Categoria recCategoria = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CategoriaPage(
+                  categorias: categorias,
+                )));
+    if (recCategoria != null) {
+      if (categorias != null) {
+        // await statusConnect.updatestatus(recStatus.status);
+      } else {
+        // await statusConnect.saveStatus(recStatus.status);
+      }
+      _getAllStatus();
+    }
+  }
+
+  void _getAllCategoria() {
+    // StatusConnect.getAllStatus().then((list) {
+    // setState(() {
+    //  listaStatus = list;
+    // });
+    //print(list);
+    // });
   }
 }

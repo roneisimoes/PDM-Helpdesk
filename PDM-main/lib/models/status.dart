@@ -85,14 +85,14 @@ class StatusConnect {
   }
 
   Future<void> dropTable() async {
-    Database dbchamado = await db;
-    return await dbchamado.rawQuery("DROP TABLE $statusTable");
+    //Database dbchamado = await db;
+    //return await dbchamado.rawQuery("DROP TABLE $statusTable");
   }
 
   Future<void> createTable() async {
-    Database dbchamado = await db;
-    return await dbchamado.rawQuery(
-        "CREATE TABLE $statusTable($idStatus INTEGER PRIMARY KEY, $nomeStatus TEXT)");
+    //Database dbchamado = await db;
+    //return await dbchamado.rawQuery(
+    //    "CREATE TABLE $statusTable($idStatus INTEGER PRIMARY KEY, $nomeStatus TEXT)");
   }
 
   Future close() async {

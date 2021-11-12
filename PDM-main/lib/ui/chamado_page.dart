@@ -31,7 +31,7 @@ class _ChamadoPageState extends State<ChamadoPage> {
     if (widget.chamado == null) {
       _editedChamado = Chamado();
     } else {
-      _editedChamado = widget.chamado;
+      _editedChamado = Chamado.fromMap(widget.chamado.toMap());
 
       _tituloController.text = _editedChamado.titulo;
       _responsavelController.text = _editedChamado.responsavel;
@@ -49,7 +49,7 @@ class _ChamadoPageState extends State<ChamadoPage> {
         onWillPop: _requestPop,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.greenAccent,
             title: Text(_editedChamado.titulo ?? "Novo Chamado"),
             centerTitle: true,
           ),
@@ -68,7 +68,7 @@ class _ChamadoPageState extends State<ChamadoPage> {
               Navigator.pop(context, _editedChamado);
             },
             child: Icon(Icons.save),
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.greenAccent,
           ),
           body: SingleChildScrollView(
             padding: EdgeInsets.all(10.0),
